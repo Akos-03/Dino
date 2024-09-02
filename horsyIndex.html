@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dino_Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- hozzaadtam a highscore.css-t -->
+  <link rel="stylesheet" href="highscore.css">
+  <script src="script.js" type="module"></script>
+</head>
+
+<body id="horsyBody">
+  <div id="countdown-container">
+    <div id="countdown-text"></div>
+    <svg id="countdown-svg"></svg>
+  </div>
+  <div class="world" data-world>
+<!---->
+    <div id="skin2">
+    <img src="/imgs/horsy/horsy_bg.png" class="ground" data-ground alt="groundpls">
+    <img src="/imgs/horsy/horsy_bg.png" class="ground" data-ground alt="groundpls">
+    
+    <div class="start-screen" data-start-screen>Press Any Key To Start</div>
+    <img src="imgs/horsy/horsy_standing.png" class="dino" data-dino alt="dinopls">
+    <div class="score" data-score>0</div>
+    </div>
+<!---->
+
+
+    <!--       <img src="../imgs/black.jpg" class="backgroundimg">        -->
+  </div>
+
+  <!-- uj -->
+  <!-- visszagomb -->
+
+  <div class="" data-back>
+    <button id="back" class="back"><img src="./imgs/back.png" alt="backpls"></button>
+  </div>
+
+  <!-- high score modal ablak -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="newHighscore">New Highscore!</div>
+      <div class="point" id="point">xxx</div>
+      Congratulations - you made it into the highscore list!<br>
+      Please enter your name below...
+      <br>
+      <br>
+      <input size="12" id="name" class="newHighscore" type="text" minlength="3" maxlength="20" autofocus>
+      <br>
+      <button id="modalClose" class="newHighscore">OK</button>
+    </div>
+  </div>
+  <!-- uj vege -->
+
+</body>
+</html>

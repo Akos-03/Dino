@@ -1,0 +1,162 @@
+/*user selet withdrawel */
+*, *::before, *::after {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+#dinoBody {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  background-image: linear-gradient(to bottom, #0e0222 0%, #2a026e 50%, #bba89f 50%);
+}
+
+#wizardBody {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  background-image: linear-gradient(to bottom, #0e0222 0%, #085c6b 50%, #232024 50%); /* 085c6b */
+}
+
+#horsyBody {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  background-image: linear-gradient(to bottom, #012024 0%, #002c32 50%, #2b2a25 50%);
+}
+ 
+
+/*
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  background-image: linear-gradient(to bottom, #0e0222 0%, #2a026e 50%, #bba89f 50%);
+}
+*/
+
+.world {
+  overflow: hidden;
+  position: relative;
+  background-color: rgb(236, 236, 236);
+}
+
+.score {
+  position: absolute;
+  font-size: 3vmin;
+  right: 1vmin;
+  top: 1vmin;
+  color: white;
+}
+
+.start-screen {
+  position: absolute;
+  font-size: 5vmin;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+
+.ground {
+  --left: 0;
+  position: absolute;
+  width: 300%;
+  bottom: 0;
+  left: calc(var(--left) * 1%)
+}
+
+.cloud {
+  position: absolute;
+  left: calc(var(--right) * 1%);
+  width: 15%;
+  bottom: 70%;
+}
+
+.dino {
+  --bottom: 0;
+  position: absolute;
+  left: 1%;
+  height: 30%;
+  bottom: calc(var(--bottom) * 1%);
+}
+
+.cactus {
+  position: absolute;
+  left: calc(var(--left) * 1%);
+  height: 17%;
+  width: 7%;
+  bottom: 0;
+}
+
+#backgroundimg {
+  z-index: -1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8000%;
+  height: 5000%;
+  opacity: 0.9;
+}
+
+#countdown-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  display: none;
+}
+
+/* countdown */
+#countdown-text {
+  font-size: 32px;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#countdown-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+#countdown-svg circle {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 10;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 0;
+  transform-origin: 50% 50%;
+}
+
+.countdown-animate {
+  animation: countdown 1,2s linear forwards;
+}
+
+@keyframes countdown {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 283;
+  }
+}

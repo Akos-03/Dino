@@ -1,0 +1,212 @@
+<!--
+hozzaadtam az imgs mappához egy back képet
+hozzaadtam egy highscore.css, highscore.js-t az alap mappahoz 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino_game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- highscore -->
+    <div class="rankings">
+        Rankings
+        <p></p>
+    </div>
+
+    <div class="contanier">
+        <div class="top">
+            <div class="start">
+                Start
+            </div>
+           <div id="howtobtn">
+            How To Play
+           </div>
+           <div id="howtodiv">
+            <button id="bezar">X</button>
+            <div class="szulodiv">
+                <div class="divek">
+                 <!-- <img id="bezar_2" src="imgs/tut_01.png"> -->
+                 <br>
+                 <br>
+                 -In the main menü you can choose in between 3 characters. 
+                 Simply click on the one that tickles your fancy, then hit the Start button 
+                 and you will be having such an exprerience you will never forget. <br>
+                 <br>
+                 -The game can be started when you press any key you like. <br>
+                 <br>
+                 -The goal of the game is to get as many points as possible in a single run. <br>
+                 <br>
+                 -During this process you can jump over the hostile objects or use your "SUPER" powers (Type the word SUPER. Jump again to deactivate the effect.)<br>
+                 <br>
+                 -In order to jump press the spacebar yet again, but be aware to time your jumps correctly. <br>
+                 <br>
+                 
+                </div>
+                
+             </div>
+             <div class="szulodiv">
+                 <div class="divek">
+                 <br>
+                 <br>
+                 -In the case when you want to use the invulnarability power you need to first gather 50 points which will be consumed after usage. 
+                 To activate the ability press the bottom-arrow key <br>
+                 <br>
+                 -You will be able to revive yourself after gathering 100 points which also will consume these points.
+                 This is a risk reward system. You can revive as many times as you want but it is not always a good option.
+                 <br>
+                 <br>
+                 <br>
+                 <p id="szin">-Try out yourself in this challenging, insanely fun and addictive videogame; 
+                     Be the best and conquer your enemies on the leaderboard! </p>
+                 
+
+                 </div>
+                 
+             </div>
+        </div>
+            <video autoplay muted loop height="100%">
+                <source src="videos/kekes.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="middle">CHOOSE A CHARACTER</div>
+        <div class="bottom">
+            <div>
+                <img id="skin0" draggable="false" src="imgs/dino-stationary.png">
+            </div>
+            <div>
+                <!-- odaraktam a wizardot -->
+                <img id="skin1" draggable="false" src="imgs/wiz/wiz_standing.png" alt="wizard">
+            </div>
+            <div>
+                <img id="skin2" draggable="false" src="imgs/horsy/horsy_standing.png">
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+        //how to play button
+    var howtobtn = document.getElementById("howtobtn");
+    var howtodiv = document.getElementById("howtodiv");
+    var bezar = document.getElementById("bezar");
+
+    howtobtn.addEventListener("click", function(){
+        howtodiv.style.display = 'flex';
+    });
+    bezar.addEventListener("click", function(){
+        howtodiv.style.display = 'none';
+    });
+    
+    </script>
+</body>
+
+<script>
+
+    //uj a highscoret irja ki
+
+    function showRankings() {
+        var scoresCookie = document.cookie.split('; ').find(row => row.startsWith('scores='));
+
+        if (scoresCookie !== "scores=[]" && scoresCookie) {
+
+            scoresCookie = scoresCookie.split('=')[1];
+
+            scores = JSON.parse(scoresCookie);
+            var highScoreString = "";
+            var j = 0;
+
+            for (i = 0; i < scores.length; i++) {
+                j = i + 1;
+                highScoreString = highScoreString + "<span>" + j + ". place:</span> " + scores[i][0] + " - " + scores[i][1] + "<br>";
+            }
+            document.querySelector(".rankings p").innerHTML = highScoreString;
+        } else {
+            document.querySelector(".rankings").innerHTML = "";
+        }
+    }
+
+    // highscore vége
+    var skinActive = 0;
+
+    window.onload = function () {
+        var vanskin = false;
+        var cookies = document.cookie.split(";");
+        //console.log(cookies);
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            var cookieParts = cookie.split("=");
+            var name = cookieParts[0];
+            var value = decodeURIComponent(cookieParts[1]);
+            if (name == "skin") {
+                skinBeallit(value);
+                vanskin = true;                
+            }
+        }
+        if (!vanskin) {
+            skinBeallit("skin0");
+        }
+        // uj
+        showRankings();
+        //
+    }
+
+    
+        var start = document.querySelector(".start");
+        start.addEventListener("click", () => {
+        //console.log(skinActive);
+
+        
+         var url = "dinoIndex.html";
+         /*if (skinActive === 2) {
+             url = "dinoIndex.html";
+         }
+         */
+        
+         var url;
+          if (skinActive == 0) {
+           url = "dinoIndex.html";
+           } 
+           if (skinActive == 1) {
+           url = "wizardIndex.html";
+           }
+           if (skinActive == 2) {
+            url = "horsyIndex.html";
+           } 
+         window.location.href = url + "?skin=" + encodeURIComponent(skinActive);
+    })
+    
+    
+
+    const imgElems = document.querySelectorAll('.bottom img');
+
+
+    imgElems.forEach(img => {
+        img.addEventListener('click', event => {
+            const clickedImgId = event.target.id;
+            skinBeallit(clickedImgId);
+            var now = new Date();
+            var expireDate = new Date(now.getTime() + (365 * 24 * 60 * 60 * 1000)); // egy év múlva
+            document.cookie = "skin=" + clickedImgId + "; SameSite=None;Secure; expires=" + expireDate.toUTCString() + "; path=/";
+        });
+    });
+
+    function skinBeallit(clickedImgId) {
+        skinActive = clickedImgId.substring(clickedImgId.length - 1);
+        imgElems.forEach(elem => {
+            elem.classList.remove("selected");
+        });
+        imgElems[skinActive].classList.add("selected");
+    }
+
+    
+</script>
+
+</html>
